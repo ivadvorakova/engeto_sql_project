@@ -8,7 +8,7 @@ SELECT
 FROM t_iva_dvorakova_project_sql_primary_final t1 
 JOIN t_iva_dvorakova_project_sql_primary_final t2  
 	ON t1.name = t2.name 
-	AND t1._year = t2._year +1
+	AND t1.price_year = t2.price_year +1
 GROUP BY t1.name
 ORDER BY avg((t1.avg_price * 100 / t2.avg_price) - 100) ASC;
 
@@ -19,25 +19,25 @@ FROM t_iva_dvorakova_project_sql_primary_final t1;
 
 SELECT 
 	t1.name,
-	t1.`_year`,  
+	t1.price_year,  
 	t1.avg_price 
 FROM t_iva_dvorakova_project_sql_primary_final t1
 GROUP BY t1.name,
-	t1.`_year` ;
+	t1.price_year ;
 	
 SELECT DISTINCT 
 	t1.name, 
-	t1.`_year`, 
+	t1.price_year, 
 	t1.avg_price, 
-	t2.`_year` AS prev_year,
+	t2.price_year AS prev_year,
 	t2.avg_price, 
 	(t1.avg_price * 100 / t2.avg_price) - 100 AS percentage_change_in_year
 FROM t_iva_dvorakova_project_sql_primary_final t1 
 JOIN t_iva_dvorakova_project_sql_primary_final t2 
 	ON t1.name = t2.name 
-	AND t1._year = t2._year +1
+	AND t1.price_year = t2.price_year +1
 ORDER BY t1.name, 
-	t1.`_year`;
+	t1.price_year;
 	
 SELECT 
 	t1.name, 
@@ -45,7 +45,7 @@ SELECT
 FROM t_iva_dvorakova_project_sql_primary_final t1 
 JOIN t_iva_dvorakova_project_sql_primary_final t2  
 	ON t1.name = t2.name 
-	AND t1._year = t2._year +1
+	AND t1.price_year = t2.price_year +1
 GROUP BY t1.name
 ORDER BY avg((t1.avg_price * 100 / t2.avg_price) - 100) ASC;
 

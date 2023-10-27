@@ -11,9 +11,7 @@
 	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2018
-	or name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2006
+	AND price_year IN ('2006','2018')
 GROUP BY branch_name, 
 	payroll_year, 
 	avg_pay,  
@@ -28,9 +26,7 @@ SELECT
 	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2018
-	or name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2006
+	AND price_year IN ('2006','2018')
 GROUP BY  
 	payroll_year, 
 	name, 
@@ -42,8 +38,8 @@ SELECT *
 FROM t_iva_dvorakova_project_sql_primary_final;
 
  SELECT 
- 	max (`_year` ), 
- 	min (`_year`)
+ 	max (price_year), 
+ 	min (price_year)
  FROM t_iva_dvorakova_project_sql_primary_final;
 
 SELECT DISTINCT 
@@ -59,9 +55,7 @@ SELECT
 	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2018
-	or name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2006
+	AND price_year IN ('2006','2018')
 GROUP BY branch_name, 
 	payroll_year, 
 	avg_pay,  
@@ -76,13 +70,10 @@ SELECT
 	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2018
-	or name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND _year = 2006
+	AND price_year IN ('2006','2018')
 GROUP BY  
 	payroll_year, 
 	name, 
 	avg_price;
-
 
 

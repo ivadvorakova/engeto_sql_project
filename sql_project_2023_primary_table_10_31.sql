@@ -1,5 +1,7 @@
 -- Úvodní tabulka t_iva_dvorakova_project_SQL_primary_final
 
+-- uživatelské jméno na discordu: dvorakovic.iva
+
 -- SQL_final
 
 CREATE OR REPLACE table t_iva_dvorakova_payroll_table AS 

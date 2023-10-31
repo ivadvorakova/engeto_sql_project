@@ -22,7 +22,7 @@ GROUP BY cp.industry_branch_code,
 CREATE OR REPLACE table t_iva_dvorakova_price_table AS
 SELECT
 	prc.name, 
-	YEAR (pr.date_from) AS _year, 
+	YEAR (pr.date_from) AS price_year, 
 	avg(pr.value) AS avg_price,
 	e.GDP 
 FROM czechia_price pr
@@ -32,13 +32,13 @@ LEFT JOIN economies e
 	ON e.`year` = YEAR (pr.date_from)
 	WHERE e.country = 'Czech Republic'
 GROUP BY prc.name, 
-	_year;
+	price_year;
 
 CREATE OR REPLACE TABLE t_iva_dvorakova_project_SQL_primary_final AS 
 SELECT *
-FROM t_iva_dvorakova_payroll_table_2 tpv2
-JOIN t_iva_dvorakova_price_table_2 tprv2 
-	ON tpv2.payroll_year = tprv2.`_year`; 
+FROM t_iva_dvorakova_payroll_table t1
+JOIN t_iva_dvorakova_price_table t2
+	ON t1.payroll_year = t2.price_year; 
 
 -- SQL_evolution
 

@@ -1,6 +1,22 @@
  -- Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
  
  -- SQL_final 
+ 
+ -- celkově
+SELECT 
+	payroll_year, 
+	name, 
+	round(avg(avg_pay), 2) AS avg_payroll,
+	round(avg_price,2),
+	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
+FROM t_iva_dvorakova_project_sql_primary_final 
+WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
+	AND price_year IN ('2006','2018')
+GROUP BY  
+	payroll_year, 
+	name, 
+	avg_price;
+
  -- pro jednotlivá odvětví
  SELECT 
 	branch_name, 
@@ -8,7 +24,7 @@
 	avg_pay,  
 	name, 
 	avg_price, 
-	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
+	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
@@ -18,19 +34,7 @@ GROUP BY branch_name,
  	name, 
 	avg_price;
 
--- celkově
-SELECT 
-	payroll_year, 
-	name, 
-	avg_price, 
-	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
-FROM t_iva_dvorakova_project_sql_primary_final 
-WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
-	AND price_year IN ('2006','2018')
-GROUP BY  
-	payroll_year, 
-	name, 
-	avg_price;
+
 
  -- SQL_evolution
  
@@ -52,7 +56,7 @@ SELECT
 	avg_pay,  
 	name, 
 	avg_price, 
-	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
+	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
@@ -67,7 +71,7 @@ SELECT
 	payroll_year, 
 	name, 
 	avg_price, 
-	round ((avg_pay / avg_price), 0) AS how_much_can_be_bought
+	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
@@ -75,5 +79,6 @@ GROUP BY
 	payroll_year, 
 	name, 
 	avg_price;
+
 
 

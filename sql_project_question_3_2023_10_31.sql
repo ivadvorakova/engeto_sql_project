@@ -3,51 +3,46 @@
 -- SQL_final 
 
 SELECT 
-	t1.name, 
-	round (avg((t1.avg_price * 100 / t2.avg_price) - 100), 2) AS average_annual_change
-FROM t_iva_dvorakova_project_sql_primary_final t1 
-JOIN t_iva_dvorakova_project_sql_primary_final t2  
-	ON t1.name = t2.name 
-	AND t1.price_year = t2.price_year +1
-GROUP BY t1.name
-ORDER BY avg((t1.avg_price * 100 / t2.avg_price) - 100) ASC;
+	tpf.name, 
+	ROUND(AVG((tpf.avg_price * 100/tpf2.avg_price) - 100), 2) AS average_annual_change
+FROM t_iva_dvorakova_project_sql_primary_final tpf 
+JOIN t_iva_dvorakova_project_sql_primary_final tpf2  
+	ON tpf.name=tpf2.name 
+	AND tpf.price_year=tpf2.price_year +1
+GROUP BY tpf.name
+ORDER BY AVG((tpf.avg_price*100/tpf2.avg_price) - 100) ASC;
 
 -- SQL_evolution
 
-SELECT *
-FROM t_iva_dvorakova_project_sql_primary_final t1;
-
 SELECT 
-	t1.name,
-	t1.price_year,  
-	t1.avg_price 
-FROM t_iva_dvorakova_project_sql_primary_final t1
-GROUP BY t1.name,
-	t1.price_year ;
+	tpf.name,
+	tpf.price_year,  
+	tpf.avg_price 
+FROM t_iva_dvorakova_project_sql_primary_final tpf
+GROUP BY tpf.name, tpf.price_year ;
 	
 SELECT DISTINCT 
-	t1.name, 
-	t1.price_year, 
-	t1.avg_price, 
-	t2.price_year AS prev_year,
-	t2.avg_price, 
-	(t1.avg_price * 100 / t2.avg_price) - 100 AS percentage_change_in_year
-FROM t_iva_dvorakova_project_sql_primary_final t1 
-JOIN t_iva_dvorakova_project_sql_primary_final t2 
-	ON t1.name = t2.name 
-	AND t1.price_year = t2.price_year +1
-ORDER BY t1.name, 
-	t1.price_year;
+	tpf.name, 
+	tpf.price_year, 
+	tpf.avg_price, 
+	tpf2.price_year AS prev_year,
+	tpf2.avg_price, 
+	(tpf.avg_price*100/tpf2.avg_price)- 100 AS percentage_change_in_year
+FROM t_iva_dvorakova_project_sql_primary_final tpf 
+JOIN t_iva_dvorakova_project_sql_primary_final tpf2 
+	ON tpf.name=tpf2.name 
+	AND tpf.price_year=tpf2.price_year +1
+ORDER BY tpf.name, tpf.price_year;
 	
 SELECT 
-	t1.name, 
-	round (avg((t1.avg_price * 100 / t2.avg_price) - 100), 2) AS average_annual_change
-FROM t_iva_dvorakova_project_sql_primary_final t1 
-JOIN t_iva_dvorakova_project_sql_primary_final t2  
-	ON t1.name = t2.name 
-	AND t1.price_year = t2.price_year +1
-GROUP BY t1.name
-ORDER BY avg((t1.avg_price * 100 / t2.avg_price) - 100) ASC;
+	tpf.name, 
+	ROUND(AVG((tpf.avg_price*100/tpf2.avg_price)-100),2) AS average_annual_change
+FROM t_iva_dvorakova_project_sql_primary_final tpf 
+JOIN t_iva_dvorakova_project_sql_primary_final tpf2  
+	ON tpf.name=tpf2.name 
+	AND tpf.price_year=tpf2.price_year+1
+GROUP BY tpf.name
+ORDER BY AVG((tpf.avg_price*100/tpf2.avg_price) - 100) ASC;
 
 
 

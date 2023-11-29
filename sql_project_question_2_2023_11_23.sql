@@ -2,48 +2,35 @@
  
  -- SQL_final 
  
- -- celkově
 SELECT 
 	payroll_year, 
 	name, 
-	round(avg(avg_pay), 2) AS avg_payroll,
-	round(avg_price,2),
-	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
+	ROUND(AVG(avg_pay), 0) AS avg_payroll,
+	ROUND(avg_price,2),
+	ROUND((AVG(avg_pay)/avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
-GROUP BY  
-	payroll_year, 
-	name, 
-	avg_price;
+GROUP BY payroll_year, name, avg_price;
 
  -- pro jednotlivá odvětví
  SELECT 
 	branch_name, 
 	payroll_year, 
-	avg_pay,  
+	ROUND(avg_pay,0),  
 	name, 
-	avg_price, 
-	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
+	ROUND(avg_price,2),
+	ROUND((AVG(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
-GROUP BY branch_name, 
-	payroll_year, 
-	avg_pay,  
- 	name, 
-	avg_price;
-
-
+GROUP BY branch_name, payroll_year, avg_pay, name, avg_price;
 
  -- SQL_evolution
  
-SELECT *
-FROM t_iva_dvorakova_project_sql_primary_final;
-
  SELECT 
- 	max (price_year), 
- 	min (price_year)
+ 	MAX(price_year), 
+ 	MIN(price_year)
  FROM t_iva_dvorakova_project_sql_primary_final;
 
 SELECT DISTINCT 
@@ -53,32 +40,24 @@ FROM t_iva_dvorakova_project_sql_primary_final;
 SELECT 
 	branch_name, 
 	payroll_year, 
-	avg_pay,  
+	ROUND(avg_pay,0),  
 	name, 
-	avg_price, 
-	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
+	ROUND(avg_price,2), 
+	ROUND((AVG(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
-GROUP BY branch_name, 
-	payroll_year, 
-	avg_pay,  
-	name, 
-	avg_price;
-
+GROUP BY branch_name, payroll_year,	avg_pay, name, avg_price;
 
 SELECT 
 	payroll_year, 
 	name, 
-	avg_price, 
-	round ((avg(avg_pay) / avg_price), 0) AS how_much_can_be_bought
+	ROUND(avg_price,2), 
+	ROUND((AVG(avg_pay) / avg_price), 0) AS how_much_can_be_bought
 FROM t_iva_dvorakova_project_sql_primary_final 
 WHERE name IN ('Mléko polotučné pasterované','Chléb konzumní kmínový')
 	AND price_year IN ('2006','2018')
-GROUP BY  
-	payroll_year, 
-	name, 
-	avg_price;
+GROUP BY payroll_year, name, avg_price;
 
 
 
